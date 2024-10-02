@@ -25,3 +25,5 @@ COLOR_MAP = {
     'Ag': '#C0C0C0', # Silver
     'Cu': '#FFA07A', # Light salmon
 }
+
+LEAVING_GROUPS = ['Cl', 'Br', 'I']
