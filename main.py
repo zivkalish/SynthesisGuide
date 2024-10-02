@@ -2,6 +2,8 @@ import drawer, builder
 from rdkit.Chem import MolFromSmiles, MolToSmiles
 from reactions.halogenation import halogenation
 from reactions.E2 import e2_reaction
+from reactions.ozonolysis import ozonolysis
+
 
 def main():
     s = "CCCC"
@@ -12,6 +14,8 @@ def main():
     molecule = halogenation(molecule, "br")
     drawer.draw_graph_as_mol(molecule)
     molecule = e2_reaction(molecule, zaitsev=True)
+    drawer.draw_graph_as_mol(molecule)
+    molecule = ozonolysis(molecule, oxidative=True)[0]
     drawer.draw_graph_as_mol(molecule)
 
 
