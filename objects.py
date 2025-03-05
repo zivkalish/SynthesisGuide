@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from rdkit import Chem
 
 @dataclass(frozen=True)
@@ -7,6 +7,10 @@ class Atom:
     atomic_num: int
     symbol: str
     charge: int
+    chem: Chem.Atom = field(init=False)
+
+    def __post_init__(self):
+        object.__setattr__(self, 'chem', self.to_chem())
 
     @classmethod
     def from_chem(cls, atom: Chem.Atom):

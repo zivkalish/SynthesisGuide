@@ -1,7 +1,7 @@
 import networkx as nx
+import networkx_utils as nx_utils
 from typing import List
 from objects import Atom
-import copy
 from reactions.utils import count_available_hydrogens, count_carbon_bonds
 
 
@@ -44,7 +44,7 @@ def halogenation(molecule: nx.Graph, halogen: str) -> nx.Graph:
         )
     else:
         raise ValueError("halogen must be either Cl or Br")
-    molecule = copy.deepcopy(molecule)
+    molecule = nx_utils.safe_copy_graph(molecule)
     candidate_carbons = get_candidate_carbons(molecule)
     if not candidate_carbons:
         return molecule

@@ -1,9 +1,9 @@
 import networkx as nx
+import networkx_utils as nx_utils
 from typing import Tuple, Optional
 from objects import Atom
 import consts
 from reactions.utils import count_available_hydrogens, count_carbon_bonds
-import copy
 
 def find_leaving_group(molecule: nx.Graph) -> Tuple[Atom, Atom] | Tuple[None, None]:
     for atom in molecule.nodes():
@@ -45,7 +45,7 @@ def e2_reaction(molecule: nx.Graph, zaitsev: bool = True) -> nx.Graph:
     if not beta_carbon:
         return molecule
 
-    molecule = copy.deepcopy(molecule)
+    molecule = nx_utils.safe_copy_graph(molecule)
     molecule.remove_node(leaving_group)
     elevate_bond(molecule, alpha_carbon, beta_carbon)
     return molecule

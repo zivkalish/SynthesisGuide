@@ -27,3 +27,5 @@ COLOR_MAP = {
 }
 
 LEAVING_GROUPS = ['Cl', 'Br', 'I']
+
+SORTED_PROTANBALE_ATOMS = ['N', 'O']
