@@ -37,6 +37,7 @@ def find_beta_carbon(molecule: nx.Graph, carbon: Atom, zaitsev: bool) -> Optiona
 
 
 def e2_reaction(molecule: nx.Graph, zaitsev: bool = True) -> nx.Graph:
+    molecule = nx_utils.safe_copy_graph(molecule)
     leaving_group, alpha_carbon = find_leaving_group(molecule)
     if not leaving_group:
         return molecule
@@ -45,7 +46,6 @@ def e2_reaction(molecule: nx.Graph, zaitsev: bool = True) -> nx.Graph:
     if not beta_carbon:
         return molecule
 
-    molecule = nx_utils.safe_copy_graph(molecule)
     molecule.remove_node(leaving_group)
     elevate_bond(molecule, alpha_carbon, beta_carbon)
     return molecule

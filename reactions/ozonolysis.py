@@ -15,12 +15,11 @@ def ozonolysis(molecule: nx.Graph, oxidative: bool) -> List[nx.Graph]:
         return [molecule]
     res = []
     for bond in double_bonds:
-        cleaved_molecules = cleave_bond(molecule, bond, oxidative)
+        cleaved_molecules = _cleave_bond(molecule, bond, oxidative)
         res.extend(cleaved_molecules)
     return res
 
-def cleave_bond(molecule: nx.Graph, bond: Tuple[Atom, Atom], oxidative: bool) -> List[nx.Graph]:
-    molecule = nx_utils.safe_copy_graph(molecule)
+def _cleave_bond(molecule: nx.Graph, bond: Tuple[Atom, Atom], oxidative: bool) -> List[nx.Graph]:
     atom1, atom2 = bond
     molecule.remove_edge(atom1, atom2)
     for atom in (atom1, atom2):
